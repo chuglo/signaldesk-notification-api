@@ -1,0 +1,32 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "signaldesk-notification-api"
+version = "0.1.0"
+description = "SignalDesk notification authority and transactional outbox"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+  "alembic>=1.16,<2", "fastapi>=0.116,<0.117", "psycopg[binary]>=3.2,<4",
+  "httpx>=0.28,<1", "pydantic-settings>=2.10,<3", "redis>=6.4,<7", "signaldesk-contracts==0.2.0",
+  "signaldesk-service-kit==0.1.0", "sqlalchemy>=2.0,<3", "uvicorn==0.35.0",
+]
+
+[dependency-groups]
+dev = ["pytest>=8.3,<9"]
+
+[tool.uv.sources]
+signaldesk-contracts = { path = "../signaldesk-contracts" }
+signaldesk-service-kit = { path = "../signaldesk-service-kit" }
+
+[project.scripts]
+signaldesk-notification-outbox-publisher = "signaldesk_notification_api.outbox_publisher:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/signaldesk_notification_api"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
