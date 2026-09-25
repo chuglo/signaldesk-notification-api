@@ -1,5 +1,7 @@
 # SignalDesk Notification API
 
+**Not for production use.**
+
 Internal, tenant-scoped notification authority. It stores identifiers and one finite
 `diagnostic_alert` template only; it never stores a recipient or target/body data and
 does not send SMTP. The email worker owns recipient selection and SMTP delivery.
@@ -44,3 +46,7 @@ Runtime settings additionally require `SIGNALDESK_NOTIFICATION_CONTROL_API_URL` 
 `SIGNALDESK_NOTIFICATION_CONTROL_API_CREDENTIAL`. The control credential is mandatory and must
 be distinct from both inbound worker credentials. Readiness checks Postgres, standalone Redis,
 and control-api `/readyz`.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
